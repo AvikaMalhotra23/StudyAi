@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "student_user": {
+      "type": "document",
+      "fields": {
+        "id": "string",
+        "name": "string",
+        "email": "string",
+        "avatar": "string",
+        "target_exam": "string",
+        "school": "string",
+        "points": "number",
+        "rating_score": "number",
+        "join_date": "string",
+        "last_login_date": "string",
+        "last_spin_date": "string",
+        "login_history": "list",
+        "study_invites": "list",
+        "accepted_buddies": "list",
+        "modules_completed": "number",
+        "doubts_solved": "number",
+        "upvotes_received": "number",
+        "role": "string",
+        "status": "string"
+      }
+    },
+    "workspace_message": {
+      "type": "document",
+      "fields": {
+        "id": "string",
+        "senderId": "string",
+        "text": "string",
+        "timestamp": "string"
+      }
+    },
+    "workspace_resource": {
+      "type": "document",
+      "fields": {
+        "id": "string",
+        "title": "string",
+        "type": "string",
+        "url": "string",
+        "addedBy": "string"
+      }
+    }
+  },
+  "firestore": {
+    "users": {
+      "$userId": {
+        "entity": "student_user"
+      }
+    },
+    "workspaces": {
+      "$workspaceId": {
+        "messages": {
+          "$messageId": {
+            "entity": "workspace_message"
+          }
+        },
+        "resources": {
+          "$resourceId": {
+            "entity": "workspace_resource"
+          }
+        }
+      }
+    }
+  }
+}

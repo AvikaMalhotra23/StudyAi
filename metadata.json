@@ -1,0 +1,6 @@
+{
+  "name": "EduQuest - Smart Education Ecosystem",
+  "description": "Gamified peer-to-peer smart learning ecosystem for CBSE Class 9-12, JEE, NEET & programming skills (Python, C++, Java) with interactive code sandboxes, study buddy matching, doubt bounties, and rewards store.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

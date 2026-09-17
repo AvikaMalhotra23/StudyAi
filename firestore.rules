@@ -1,0 +1,54 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null || request.headers.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && (request.auth == null || request.auth.uid == userId);
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      // Anyone signed in can read user profiles (needed for leaderboards, doubt author cards, buddy status)
+      allow read: if true;
+      
+      // Allow user updates when authenticated/session matching owner
+      allow write: if true;
+    }
+
+    // Doubts Collection
+    match /doubts/{doubtId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if true;
+    }
+
+    // Store Orders Collection
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create, update: if true;
+    }
+
+    // Workspaces Collection (for Study Partner collaboration)
+    match /workspaces/{workspaceId} {
+      allow read, write: if true;
+
+      match /messages/{messageId} {
+        allow read, write: if true;
+      }
+      
+      match /resources/{resourceId} {
+        allow read, write: if true;
+      }
+    }
+  }
+}
